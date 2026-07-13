@@ -1,0 +1,26 @@
+import numpy as np
+
+def my_mean(x:np.array):
+    return x.sum()/x.size
+
+def my_std(x:np.array):
+    mu = my_mean(x)
+    variance = ((x-mu)**2).sum() / x.size
+    return np.sqrt(variance)
+
+def my_cov(x:np.array,y:np.array):
+    mx = my_mean(x)
+    my = my_mean(y)
+    return ((x-mx)*(y-my)).sum() / x.size
+
+def my_pearson_correlation(x:np.array,y:np.array):
+    x_std = my_std(x)
+    y_std = my_std(y)
+    cov = my_cov(x,y)
+    return cov / (x_std*y_std)
+
+a = np.array([1,2,3,4,5])
+b =  np.array([5,4,3,2,1])
+
+print(my_cov(a,b))
+print(my_pearson_correlation(a,b))
